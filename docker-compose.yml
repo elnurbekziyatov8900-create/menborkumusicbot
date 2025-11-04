@@ -1,0 +1,7 @@
+
+services:
+  musicbot:
+    build: .
+    container_name: telegram_music_bot
+    restart: always
+    env_file: .env
