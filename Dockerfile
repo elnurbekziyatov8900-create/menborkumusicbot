@@ -1,14 +1,15 @@
-# Python 3.13 bazaviy imidjidan foydalanamiz
-FROM python:3.13-slim
+FROM python:3.11-slim
 
-# Ishchi papkani yaratamiz
 WORKDIR /app
 
-# Fayllarni konteyner ichiga nusxalaymiz
-COPY . /app
+# Fayllarni ish papkasiga nusxalash
+COPY . .
 
-# Kerakli kutubxonalarni o‘rnatamiz
-RUN pip install --no-cache-dir python-telegram-bot==21.4 yt-dlp python-dotenv requests pyopenssl
+# Python kutubxonalarini o‘rnatish
+RUN pip install --no-cache-dir -r requirements.txt
 
-# Asosiy faylni ishga tushirish
+# ffmpeg o‘rnatish (audio uchun)
+RUN apt-get update && apt-get install -y ffmpeg && apt-get clean
+
+# Botni ishga tushirish
 CMD ["python", "telegram_music_bot.py"]
