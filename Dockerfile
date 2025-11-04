@@ -1,15 +1,11 @@
-FROM python:3.11-slim
+FROM python:3.10-slim
 
 WORKDIR /app
 
-# Fayllarni ish papkasiga nusxalash
-COPY . .
-
-# Python kutubxonalarini o‘rnatish
+COPY requirements.txt requirements.txt
 RUN pip install --no-cache-dir -r requirements.txt
 
-# ffmpeg o‘rnatish (audio uchun)
-RUN apt-get update && apt-get install -y ffmpeg && apt-get clean
+COPY . .
 
-# Botni ishga tushirish
+# Bu bot portsiz ishlaydi
 CMD ["python", "telegram_music_bot.py"]
